@@ -1,0 +1,18 @@
+---
+- name: Add a Single SSH Authorized Key
+  include_tasks: single.yml
+  when:
+    - authorized_keys_entry is defined
+    - user_for_authorized_keys is defined
+    - ssh_authorized_keys is undefined
+
+- name: Add Multiple SSH Authorized Keys
+  include_tasks: single.yml
+  loop: "{{ ssh_authorized_keys if ssh_authorized_keys is defined else [] }}"
+  loop_control:
+    loop_var: ssh_authorized_key_item
+  vars:
+    authorized_keys_entry: "{{ ssh_authorized_key_item.authorized_keys_entry }}"
+    user_for_authorized_keys: "{{ ssh_authorized_key_item.user_for_authorized_keys }}"
+  when:
+    - ssh_authorized_keys is defined

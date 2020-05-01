@@ -1,0 +1,6 @@
+---
+- name: "Set SSH Authorized Key to user {{ user_for_authorized_keys }}"
+  authorized_key:
+    user: "{{ user_for_authorized_keys }}"
+    state: present
+    key: "{{ authorized_keys_entry }}"
