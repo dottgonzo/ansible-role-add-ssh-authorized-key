@@ -4,7 +4,6 @@
   when:
     - authorized_keys_entry is defined
     - user_for_authorized_keys is defined
-    - ssh_authorized_keys is undefined
 
 - name: Add Multiple SSH Authorized Keys
   include_tasks: single.yml
